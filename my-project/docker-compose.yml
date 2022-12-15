@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  myapp:
+    image: 'docker.io/bitnami/symfony:6.1'
+    ports:
+      - '8000:8000'
+    volumes:
+      - '.:/app'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - SYMFONY_PROJECT_NAME=myapp
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MARIADB_USER=abdel
+      - MARIADB_DATABASE=planet_fitness
+    depends_on:
+      - mariadb
+  mariadb:
+    image: 'bitnami/mariadb:10.3'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=abdel
+      - MARIADB_DATABASE=planet_fitness
